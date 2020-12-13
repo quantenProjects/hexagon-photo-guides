@@ -24,6 +24,10 @@ You can just call `add_guides` with a filename and get centered hexagon markings
 
 However, you may want some more control:
 
+* `-p`, `--preset`
+  * In order to make the process easier, presets for the resolution and cutting margin can be added to the program.
+  * The program will choose the resolution (and corresponding cutting margin) with the lowest difference in height.
+  * Use `-p list` (and any file) to list all known presets.
 * `-r`, `--force-resolution`
   * As the cutting margin will probably vary with the resolution, you want a fixed resolution for printing. This scale the image to the given height. Then it will either crop the image to the ratio of the specified size or adds white space left and right of the image.
   * Example `-r 3600x2540`
@@ -40,9 +44,17 @@ If you want to mark a set of photos, a bash for-loop will make things easier:
 
 ```bash
 for i in *.JPG
-do 
+do
 	echo $i
 	python ./add_guides.py -g 1024 -r 3600x2540 -c 19,49,35,53 $i
+done
+```
+
+```bash
+for i in *.JPG
+do
+	echo $i
+	python ./add_guides.py -p dm_fotoparadies_labor $i
 done
 ```
 
